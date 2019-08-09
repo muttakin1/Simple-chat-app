@@ -3,7 +3,7 @@ var mongoose = require ('mongoose');
 var userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: "Add your name"
+        required: "Name is required"
     }
 });
 
