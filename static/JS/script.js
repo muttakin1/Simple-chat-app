@@ -17,7 +17,7 @@ $('#loginForm').submit(function(event){
    
   });
 
-  SocketIO.on('get users', function(data){
+  io.connect().on('get users', function(data){
     var html = '';
     for(i = 0; i < data.length; i++){
       html += '<li class="list-group-item">'+data[i]+'</li>';
