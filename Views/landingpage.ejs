@@ -1,6 +1,6 @@
 <% include ./partials/header.ejs %>
 
-<title>Log in</title>
+<title>Simple chat app</title>
 </head>
 
 <body>
@@ -9,14 +9,45 @@
       <h2 id="heading">15 min chat sessions</h2>
       <div class="form-group">
         <label for="exampleInputEmail1">User name</label>
-        <input id="name" type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        <input id="username" type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
           placeholder="Enter User name">
-
+        <label id="SessionName1" for="SessionName">Session name</label>
+        <input type="name" class="form-control" id="SessionName" aria-describedby="emailHelp"
+          placeholder="Enter Session name">
+          <button id="loginbtn" type="submit" class="btn btn-primary">Log in</button>
     </form>
-    <button id="loginbtn" type="submit" class="btn btn-primary">Log in</button>
+    
+  </div>
+  
+  <div id="messageArea" class="row">
+    <div class="col-md-4">
+      <div class="well">
+        <h3>Members</h3>
+        <ul class="list-group" id="users"></ul>
+        <h3>Timer</h3>
+        <p id="timer"></p>
+        <button id="startbtn">Start</button>
+        <button id="stopbtn">Stop</button>
+      </div>
+    </div>
+
+    <!-- Main chat area -->
+    <div class="col-md-8">
+      <div class="chat" id="chat">
+        <form id="messageForm">
+          <div class="form-group">
+            <label>Enter Message:</label>
+            <textarea class="form-control" id="message">
+            </textarea>
+            <br />
+            <button id="messagebtn" class="btn btn-primary">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 
- 
+  
 
 
   <% include ./partials/footer.ejs %>
