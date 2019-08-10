@@ -38,6 +38,7 @@ $('#loginForm').submit(function(event){
       $('#stopbtn').hide();
       $('#messagebtn').hide();
       $('#message').hide();
+      
      
     }
   });
