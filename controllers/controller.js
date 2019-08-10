@@ -19,3 +19,16 @@ module.exports.create =  function(request, response){
 
 
 }
+module.exports.list = function(request, response) {
+  User.find(function(err, data){
+    if(err){
+      response.status(400)
+        .json({
+          error: "Database query error"
+        });
+    }
+    response.status(200).json({
+      user: data
+    });
+  });
+}

@@ -19,6 +19,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.static(path.join(__dirname, 'static')));
 
+io.on('connection', function (socket) {
+  socket.on('message', function () { });
+  socket.on('disconnect', function () { });
+});
 
 require('./routes/routes.js')(app);
 

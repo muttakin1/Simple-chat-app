@@ -1,3 +1,5 @@
+
+
 $(document).ready(function(){
 
     $('#messageArea').hide();
@@ -13,6 +15,14 @@ $('#loginForm').submit(function(event){
         $('#messageArea').show();
       
    
+  });
+
+  SocketIO.on('get users', function(data){
+    var html = '';
+    for(i = 0; i < data.length; i++){
+      html += '<li class="list-group-item">'+data[i]+'</li>';
+    }
+    $users.html(html);
   });
 
   document.getElementById('timer').innerHTML = 15+":"+00;
@@ -75,4 +85,15 @@ var session = {name:""};
         
        
        
+    });
+
+    $('#getUser').click(function(event){
+      $.ajax({
+          method: "GET",
+          url: "/user/list",
+      }).done(function(response){
+          console.log(response);
+      }).fail(function(response){
+          console.log(response.responseText);
+      });
     });
