@@ -31,10 +31,10 @@ $('#loginForm').submit(function(event){
   $('#userForm').submit(function(event){
     event.preventDefault();
    
-    socket.emit('new user', $username.val(), function(data){
+    io.connect().emit('new user', $username.val(), function(data){
       if(data){
-        $userform.hide();
-        $messageArea.show();
+        $('#userform').hide();
+        $('#messageArea').show();
       }
     });
     $('#username').val('');
@@ -88,7 +88,7 @@ $('#loginForm').submit(function(event){
     
   });
   function checkSecond(sec) {
-    if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+    if (sec < 10 && sec >= 0) {sec = "0" + sec};
     if (sec < 0) {sec = "59"};
     return sec;
   }
