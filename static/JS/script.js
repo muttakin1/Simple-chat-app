@@ -13,8 +13,31 @@ $('#loginForm').submit(function(event){
         document.getElementById('jumbotron').style.width = '80%';
       
         $('#messageArea').show();
+        $('#messageForm').hide();
       
    
+  });
+  $('#messageForm').submit(function(event){
+    event.preventDefault();
+    console.log('Submitted');
+    io.connect().emit('send message', $('#message').val());
+    $('message').val('');
+  });
+
+  io.connect().on('new message', function(data){
+    $('#chat').prepend('<div class="well"><strong>'+data.user+'</strong>: '+data.msg+'</div>');
+  });
+
+  $('#userForm').submit(function(event){
+    event.preventDefault();
+   
+    socket.emit('new user', $username.val(), function(data){
+      if(data){
+        $userform.hide();
+        $messageArea.show();
+      }
+    });
+    $('#username').val('');
   });
 
   io.connect().on('get users', function(data){
@@ -22,8 +45,12 @@ $('#loginForm').submit(function(event){
     for(i = 0; i < data.length; i++){
       html += '<li class="list-group-item">'+data[i]+'</li>';
     }
-    $users.html(html);
+    $('#users').html(html);
   });
+
+
+  io.connect().on('get sessions', function(data){
+  })
 
   document.getElementById('timer').innerHTML = 15+":"+00;
   
@@ -32,8 +59,7 @@ $('#loginForm').submit(function(event){
   $('#startbtn').click(function startTimer(){
     $('#startbtn').hide();
     $('#stopbtn').show();
-    $('#message').show();
-    $('#messagebtn').show();
+    $('#messageForm').show();
     var presentTime = document.getElementById('timer').innerHTML;
     var timeArray = presentTime.split(/[:]+/);
     var m = timeArray[0];
